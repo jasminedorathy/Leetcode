@@ -1,4 +1,4 @@
-class Solution {
+/*class Solution {
     public void sortColors(int[] nums) {
         for(int i=0;i<nums.length;i++)
         {
@@ -14,4 +14,25 @@ class Solution {
         }
        
     }
+}*/
+
+class Solution {
+    public void sortColors(int[] nums) {
+        int max ;
+        int temp ;
+        for(int i = nums.length - 1;  i >= 0 ; i--)
+        {  max = 0;
+            for(int j = 0 ; j <= i ; j++)
+            { 
+                if(nums[max] < nums[j])
+                {
+                    max = j;
+                }
+             }
+        
+            temp = nums[i];
+            nums[i] = nums[max];
+            nums[max] = temp;
+         }
+        }
 }
