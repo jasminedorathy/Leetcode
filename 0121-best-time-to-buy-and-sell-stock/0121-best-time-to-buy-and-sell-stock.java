@@ -9,8 +9,5 @@ class Solution {
         mini = Math.min(mini,prices[i]);
     }
     return profit;
-
-           
-           
-    }
+     }
 }
