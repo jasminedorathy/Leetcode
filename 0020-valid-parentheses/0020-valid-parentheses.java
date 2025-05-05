@@ -1,24 +1,19 @@
 class Solution {
     public boolean isValid(String s) {
-        char[] brackets = s.toCharArray();
-        Stack<Character> stack = new Stack<Character>();
-        for(int i=0;i<brackets.length;i++){
-            if(brackets[i] == '(' 
-            || brackets[i] == '{'
-             || brackets[i]=='['){
-                stack.push(brackets[i]);
-            }else{
-                if(stack.isEmpty()){
-                    return false;
-                }else if((brackets[i] == '}' && stack.peek() != '{')
-                || (brackets[i] == ']' && stack.peek() != '[')
-                || (brackets[i] == ')' && stack.peek() != '(')){
-                    return false; // return false if the brackets don't match.
-                }else{
-                   stack.pop(); // pop() if a match is found.
-                }
+        char[] stack = new char[s.length()];
+        int top = -1;
+        for(char c: s.toCharArray()) {
+            switch(c) {
+                case ')': 
+                if (top == -1 || stack[top--] != '(') return false; break;
+                case '}':
+                if (top == -1 || stack[top--] != '{') return false; break;
+                case ']':
+                if (top == -1 || stack[top--] != '[') return false; break;
+                default: 
+                stack[++top] = c; break;
             }
         }
-        return stack.isEmpty(); //  true if all the brackets match, false otherwise.
+        return top == -1;
     }
 }
