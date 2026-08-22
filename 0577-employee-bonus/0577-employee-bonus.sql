@@ -1,3 +1,2 @@
-SELECT Employee.name,Bonus.bonus FROM Employee 
-LEFT JOIN Bonus ON Employee.empID = Bonus.empID
-WHERE bonus < 1000 OR Bonus IS NULL ;
+/* Write your PL/SQL query statement below */
+select e.name as Name , b.bonus from employee e left join bonus b on e.empId = b.empId where bonus < 1000 or bonus is null; 
