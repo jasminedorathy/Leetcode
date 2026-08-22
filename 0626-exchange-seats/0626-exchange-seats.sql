@@ -1,6 +1,9 @@
-SELECT IF (id < (SELECT MAX(id) FROM Seat), 
-            IF(id % 2 = 0, id - 1, id + 1), 
-            IF(id % 2 = 0, id - 1, id)
-        ) AS id, student
-FROM Seat
-ORDER BY id;
+/* Write your PL/SQL query statement below */
+select 
+case 
+when mod(id,2) = 1 and id <> (select max(id) from seat) then id+1
+when mod(id,2) = 0 then id-1
+else id end as id,
+student
+from seat
+order by id;
