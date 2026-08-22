@@ -1,2 +1,12 @@
-/* Write your PL/SQL query statement below */
-select customer_number from (select customer_number,row_number() over (order by count(*) Desc) rn from orders group by customer_number)q  where rn = 1;
+
+
+WITH customer_orders AS (
+    SELECT customer_number,
+           COUNT(*) AS order_count,
+           DENSE_RANK() OVER (ORDER BY COUNT(*) DESC) AS rnk
+    FROM Orders
+    GROUP BY customer_number
+)
+SELECT customer_number
+FROM customer_orders
+WHERE rnk = 1;
