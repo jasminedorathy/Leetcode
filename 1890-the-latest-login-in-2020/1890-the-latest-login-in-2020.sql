@@ -1,8 +1,8 @@
-SELECT user_id,
-       MAX(time_stamp) AS last_stamp
-FROM logins
-WHERE time_stamp >= TO_TIMESTAMP('2020-01-01 00:00:00',
-                                 'YYYY-MM-DD HH24:MI:SS')
-  AND time_stamp < TO_TIMESTAMP('2021-01-01 00:00:00',
-                                'YYYY-MM-DD HH24:MI:SS')
-GROUP BY user_id;
+
+select user_id, time_stamp last_stamp
+from (
+    select user_id, time_stamp, row_number() over(partition by user_id order by time_stamp desc) as rnk
+    from logins
+    where extract(year from time_stamp)=2020
+)
+where rnk=1
